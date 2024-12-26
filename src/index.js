@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./Geo_laocation";
+import App from "./App";
 // import App from "./currencey_converter";
 // import StarRating from "./StarRating2";
 // import App from "./text-expander";
