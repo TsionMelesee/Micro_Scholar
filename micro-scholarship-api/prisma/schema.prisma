@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  DONOR
+  ADMIN
+}
+
+model User {
+  id        String     @id @default(uuid())  // UUID as String
+  name      String
+  email     String   @unique
+  password  String
+  role      Role @default(STUDENT)
+  createdAt DateTime @default(now())
+  requests  ScholarshipRequest[]
+  donations Donation[]
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  FUNDED
+}
+
+model ScholarshipRequest {
+  id              String    @id @default(uuid())  // UUID as String
+  title           String
+  description     String
+  amount          Float
+  status          String
+  documentUrl     String   // URL to the uploaded document
+  createdAt       DateTime @default(now())
+  student         User     @relation(fields: [studentId], references: [id])
+  studentId       String   // Changed to String to match `User.id`
+  requestedAmount Float
+  fundedAmount    Float @default(0)
+  donations       Donation[]
+}
+
+model Donation {
+  id         Int      @id @default(autoincrement())
+  donor      User     @relation(fields: [donorId], references: [id])
+  donorId    Int
+  request    ScholarshipRequest @relation(fields: [requestId], references: [id])
+  requestId  Int
+  amount     Float
+  createdAt  DateTime @default(now())
+}
