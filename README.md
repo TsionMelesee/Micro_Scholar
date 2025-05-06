@@ -1,4 +1,4 @@
-## Micro Scholar App
+## Micro Scholarship App
 
 Micro Scholar is a Flutter-based mobile application designed to simplify and enhance the management of scholarships, donations, and user interactions. With seamless integration to a robust backend API, it offers real-time data and a smooth, user-friendly experience.
 
